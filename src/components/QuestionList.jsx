@@ -1,4 +1,5 @@
 import React from "react";
+import QuestionCard from "./QuestionCard";
 
 function QuestionList({ questions, setQuestions }) {
   const handleAddQuestion = () => {
@@ -26,9 +27,13 @@ function QuestionList({ questions, setQuestions }) {
           <p>Have no questions. Click "Add Question" to create a new question</p>
         </div>
       ) : (
-        <div className="card">
+        <div>
           {questions.map((q, index) => (
-            <div key={q.id}>Question {index + 1}</div>
+            <QuestionCard
+              key={q.id}
+              question={q}
+              index={index}
+            />
           ))}
         </div>
       )}
