@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="app">
       <Header />
-      <div>
+      <div className="main-content">
         <QuizInfo quizData={quizData} setQuizData={setQuizData} />
       </div>
     </div>

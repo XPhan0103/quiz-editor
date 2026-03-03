@@ -45,3 +45,42 @@ header {
   color           : white;
   border          : none;
 }
+
+.main-content {
+  padding: 0 20px;
+}
+
+.quiz-info-container h2 {
+  font-size    : 16px;
+  margin-bottom: 15px;
+}
+
+.card {
+  background-color: white;
+  border          : 1px solid #666;
+  border-radius   : 8px;
+  padding         : 20px;
+  margin-bottom   : 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display      : block;
+  font-weight  : bold;
+  margin-bottom: 5px;
+  font-size    : 14px;
+}
+
+.form-group input,
+.form-group textarea {
+  width        : 100%;
+  padding      : 10px;
+  border       : 1px solid #666;
+  border-radius: 8px;
+  box-sizing   : border-box;
+  font-family  : inherit;
+  font-size    : 14px;
+}

@@ -2,10 +2,10 @@ import React from 'react';
 
 function QuizInfo({ quizData, setQuizData }) {
     return (
-        <div>
+        <div className="quiz-info-container">
             <h2>Quiz Information</h2>
-            <div>
-                <div>
+            <div className="card">
+                <div className="form-group">
                     <label>Quiz Name</label>
                     <input
                         type="text"
@@ -14,7 +14,7 @@ function QuizInfo({ quizData, setQuizData }) {
                         onChange={(e) => setQuizData({ ...quizData, name: e.target.value })}
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Quiz Description</label>
                     <textarea
                         placeholder="Enter quiz description"
