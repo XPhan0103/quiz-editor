@@ -1,12 +1,12 @@
-import React from "react";
-import QuestionCard from "./QuestionCard";
+import React from 'react';
+import QuestionCard from './QuestionCard';
 
 function QuestionList({ questions, setQuestions }) {
 	const handleAddQuestion = () => {
 		const newQuestion = {
-			id: Date.now().toString(),
-			name: "",
-			description: "",
+			id: Date.now().toString(), // unique ID
+			name: '',
+			description: '',
 			sortOrder: questions.length + 1,
 			options: [],
 		};
@@ -19,7 +19,12 @@ function QuestionList({ questions, setQuestions }) {
 
 	const handleQuestionChange = (id, field, value) => {
 		setQuestions(
-			questions.map((q) => (q.id === id ? { ...q, [field]: value } : q))
+			questions.map((q) => {
+				if (q.id === id) {
+					return { ...q, [field]: value };
+				}
+				return q;
+			})
 		);
 	};
 
@@ -37,7 +42,7 @@ function QuestionList({ questions, setQuestions }) {
 					<p>Have no questions. Click "Add Question" to create a new question</p>
 				</div>
 			) : (
-				<div>
+				<div className="questions-list">
 					{questions.map((q, index) => (
 						<QuestionCard
 							key={q.id}
