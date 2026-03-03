@@ -13,6 +13,10 @@ function QuestionList({ questions, setQuestions }) {
 		setQuestions([...questions, newQuestion]);
 	};
 
+	const handleDeleteQuestion = (id) => {
+		setQuestions(questions.filter((q) => q.id !== id));
+	};
+
 	return (
 		<div className="question-list-container">
 			<div className="section-header">
@@ -33,6 +37,7 @@ function QuestionList({ questions, setQuestions }) {
 							key={q.id}
 							question={q}
 							index={index}
+							onDelete={handleDeleteQuestion}
 						/>
 					))}
 				</div>
