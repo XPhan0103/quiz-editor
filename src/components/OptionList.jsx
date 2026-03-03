@@ -40,6 +40,7 @@ function OptionList({ options, setOptions }) {
                         <OptionCard
                             key={opt.id}
                             option={opt}
+                            onChange={handleOptionChange}
                         />
                     ))
                 )}
