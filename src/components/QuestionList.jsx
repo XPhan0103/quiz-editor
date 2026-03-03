@@ -17,6 +17,12 @@ function QuestionList({ questions, setQuestions }) {
 		setQuestions(questions.filter((q) => q.id !== id));
 	};
 
+	const handleQuestionChange = (id, field, value) => {
+		setQuestions(
+			questions.map((q) => (q.id === id ? { ...q, [field]: value } : q))
+		);
+	};
+
 	return (
 		<div className="question-list-container">
 			<div className="section-header">
@@ -38,6 +44,7 @@ function QuestionList({ questions, setQuestions }) {
 							question={q}
 							index={index}
 							onDelete={handleDeleteQuestion}
+							onChange={handleQuestionChange}
 						/>
 					))}
 				</div>
