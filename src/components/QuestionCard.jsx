@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FiTrash2, FiChevronUp, FiChevronDown } from 'react-icons/fi';
+import OptionList from './OptionList';
 
 function QuestionCard({ question, index, onDelete, onChange }) {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -48,9 +49,7 @@ function QuestionCard({ question, index, onDelete, onChange }) {
                             rows="3"
                         />
                     </div>
-                    <div className="options-placeholder">
-                        <p>Options will be added here...</p>
-                    </div>
+                    <OptionList />
                 </div>
             )}
         </div>
