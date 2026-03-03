@@ -1,9 +1,9 @@
 import React from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 
-function OptionCard({ option, onChange, onDelete }) {
+function OptionCard({ option, index, onChange, onDelete }) {
     return (
-        <div className="form-row">
+        <div className="option-item form-row">
             <div className="form-group flex-2">
                 <input
                     type="text"
@@ -28,7 +28,7 @@ function OptionCard({ option, onChange, onDelete }) {
                     placeholder="Order"
                 />
             </div>
-            <div className="form-group">
+            <div className="form-group checkbox-group">
                 <label>
                     <input
                         type="checkbox"

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Header from './components/Header';
 import QuizInfo from './components/QuizInfo';
-import QuestionList from "./components/QuestionList";
+import QuestionList from './components/QuestionList';
 import './index.css';
 
 function App() {

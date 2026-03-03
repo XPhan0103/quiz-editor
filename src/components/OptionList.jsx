@@ -29,21 +29,22 @@ function OptionList({ options, setOptions }) {
     };
 
     return (
-        <div>
+        <div className="options-container">
             <div className="section-header">
-                <span>Options</span>
-                <button onClick={handleAddOption}>
+                <span className="section-title">Options</span>
+                <button className="secondary" onClick={handleAddOption}>
                     + Add Option
                 </button>
             </div>
-            <div>
+            <div className="options-list">
                 {(!options || options.length === 0) ? (
-                    <div>Options detail...</div>
+                    <div className="empty-state-small">No options added yet.</div>
                 ) : (
                     options.map((opt, index) => (
                         <OptionCard
                             key={opt.id}
                             option={opt}
+                            index={index}
                             onChange={handleOptionChange}
                             onDelete={handleDeleteOption}
                         />
