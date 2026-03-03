@@ -24,6 +24,10 @@ function OptionList({ options, setOptions }) {
         );
     };
 
+    const handleDeleteOption = (id) => {
+        setOptions(options.filter((opt) => opt.id !== id));
+    };
+
     return (
         <div>
             <div className="section-header">
@@ -41,6 +45,7 @@ function OptionList({ options, setOptions }) {
                             key={opt.id}
                             option={opt}
                             onChange={handleOptionChange}
+                            onDelete={handleDeleteOption}
                         />
                     ))
                 )}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 
-function OptionCard({ option, onChange }) {
+function OptionCard({ option, onChange, onDelete }) {
     return (
         <div className="form-row">
             <div className="form-group flex-2">
@@ -38,7 +38,7 @@ function OptionCard({ option, onChange }) {
                     Correct
                 </label>
             </div>
-            <button>
+            <button className="icon-btn delete-btn" onClick={() => onDelete(option.id)}>
                 <FiTrash2 />
             </button>
         </div>
