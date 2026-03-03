@@ -49,7 +49,10 @@ function QuestionCard({ question, index, onDelete, onChange }) {
                             rows="3"
                         />
                     </div>
-                    <OptionList />
+                    <OptionList
+                        options={question.options}
+                        setOptions={(newOptions) => onChange(question.id, 'options', newOptions)}
+                    />
                 </div>
             )}
         </div>

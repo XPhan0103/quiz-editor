@@ -1,4 +1,5 @@
 import React from 'react';
+import OptionCard from './OptionCard';
 
 function OptionList({ options, setOptions }) {
     const handleAddOption = () => {
@@ -12,6 +13,17 @@ function OptionList({ options, setOptions }) {
         setOptions([...(options || []), newOption]);
     };
 
+    const handleOptionChange = (id, field, value) => {
+        setOptions(
+            options.map((opt) => {
+                if (opt.id === id) {
+                    return { ...opt, [field]: value };
+                }
+                return opt;
+            })
+        );
+    };
+
     return (
         <div>
             <div className="section-header">
@@ -21,7 +33,16 @@ function OptionList({ options, setOptions }) {
                 </button>
             </div>
             <div>
-                <div>Options detail...</div>
+                {(!options || options.length === 0) ? (
+                    <div>Options detail...</div>
+                ) : (
+                    options.map((opt, index) => (
+                        <OptionCard
+                            key={opt.id}
+                            option={opt}
+                        />
+                    ))
+                )}
             </div>
         </div>
     );
