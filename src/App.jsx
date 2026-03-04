@@ -28,9 +28,31 @@ function App() {
         URL.revokeObjectURL(url);
     };
 
+    const handleImport = (file) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const parsedData = JSON.parse(e.target.result);
+                if (typeof parsedData === 'object' && parsedData !== null) {
+                    setQuizData({
+                        name: parsedData.name || '',
+                        description: parsedData.description || '',
+                        questions: Array.isArray(parsedData.questions) ? parsedData.questions : [],
+                    });
+                    alert('Import Quiz successfully!');
+                } else {
+                    alert('Invalid quiz data format!');
+                }
+            } catch (error) {
+                alert('Error parse JSON file!');
+            }
+        };
+        reader.readAsText(file);
+    };
+
     return (
         <div className="app">
-            <Header onExport={handleExport} />
+            <Header onExport={handleExport} onImport={handleImport} />
             <div className="main-content">
                 <QuizInfo quizData={quizData} setQuizData={setQuizData} />
                 <QuestionList questions={quizData.questions} setQuestions={setQuestions} />

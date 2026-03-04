@@ -1,6 +1,22 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 function Header({ onExport, onImport, onSave }) {
+    const fileInputRef = useRef(null);
+
+    const handleImportClick = () => {
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
+    };
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            onImport(file);
+            e.target.value = null;
+        }
+    };
+
     return (
         <header>
             <div className="header-left">
@@ -8,7 +24,14 @@ function Header({ onExport, onImport, onSave }) {
                 <p>Create or Update a Quiz</p>
             </div>
             <div className="header-right">
-                <button onClick={onImport}>Import JSON</button>
+                <input
+                    type="file"
+                    accept=".json"
+                    style={{ display: 'none' }}
+                    ref={fileInputRef}
+                    onChange={handleFileChange}
+                />
+                <button onClick={handleImportClick}>Import JSON</button>
                 <button onClick={onExport}>Export JSON</button>
                 <button className="save-btn" onClick={onSave}>Save Quiz</button>
             </div>
