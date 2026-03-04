@@ -12,12 +12,25 @@ function App() {
     });
 
     const setQuestions = (newQuestions) => {
-        setQuizData((prev) => ({ ...prev, questions: newQuestions }));
+        setQuizData({ ...quizData, questions: newQuestions });
+    };
+
+    const handleExport = () => {
+        const dataStr = JSON.stringify(quizData, null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${quizData.name || 'quiz_export'}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
     };
 
     return (
         <div className="app">
-            <Header />
+            <Header onExport={handleExport} />
             <div className="main-content">
                 <QuizInfo quizData={quizData} setQuizData={setQuizData} />
                 <QuestionList questions={quizData.questions} setQuestions={setQuestions} />

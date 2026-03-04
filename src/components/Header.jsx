@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Header() {
+function Header({ onExport, onImport, onSave }) {
     return (
         <header>
             <div className="header-left">
@@ -8,9 +8,9 @@ function Header() {
                 <p>Create or Update a Quiz</p>
             </div>
             <div className="header-right">
-                <button>Import JSON</button>
-                <button>Export JSON</button>
-                <button className="save-btn">Save Quiz</button>
+                <button onClick={onImport}>Import JSON</button>
+                <button onClick={onExport}>Export JSON</button>
+                <button className="save-btn" onClick={onSave}>Save Quiz</button>
             </div>
         </header>
     );
