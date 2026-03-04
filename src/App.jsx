@@ -15,7 +15,33 @@ function App() {
         setQuizData({ ...quizData, questions: newQuestions });
     };
 
+    const validateQuiz = () => {
+        if (!quizData.questions || quizData.questions.length === 0) {
+            alert('A quiz must have at least one question.');
+            return false;
+        }
+
+        for (let i = 0; i < quizData.questions.length; i++) {
+            const q = quizData.questions[i];
+            const qName = q.name || `Question ${i + 1}`;
+
+            if (!q.options || q.options.length < 2) {
+                alert(`"${qName}" must have at least 2 options.`);
+                return false;
+            }
+
+            const correctOptions = q.options.filter(opt => opt.isCorrect);
+            if (correctOptions.length < 1) {
+                alert(`"${qName}" must have at least 1 correct option.`);
+                return false;
+            }
+        }
+        return true;
+    };
+
     const handleExport = () => {
+        if (!validateQuiz()) return;
+
         const dataStr = JSON.stringify(quizData, null, 2);
         const blob = new Blob([dataStr], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
@@ -50,9 +76,15 @@ function App() {
         reader.readAsText(file);
     };
 
+    const handleSave = () => {
+        if (validateQuiz()) {
+            alert('Quiz saved successfully!');
+        }
+    };
+
     return (
         <div className="app">
-            <Header onExport={handleExport} onImport={handleImport} />
+            <Header onExport={handleExport} onImport={handleImport} onSave={handleSave} />
             <div className="main-content">
                 <QuizInfo quizData={quizData} setQuizData={setQuizData} />
                 <QuestionList questions={quizData.questions} setQuestions={setQuestions} />
