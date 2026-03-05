@@ -1,15 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import QuizInfo from './components/QuizInfo';
 import QuestionList from './components/QuestionList';
 import './index.css';
 
 function App() {
-    const [quizData, setQuizData] = useState({
-        name: '',
-        description: '',
-        questions: [],
+    const [quizData, setQuizData] = useState(() => {
+        const saved = localStorage.getItem('quizData');
+        if (saved) {
+            try {
+                return JSON.parse(saved);
+            } catch (e) {
+                console.error("Failed to parse quizData from localStorage", e);
+            }
+        }
+        return {
+            name: '',
+            description: '',
+            questions: [],
+        };
     });
+
+    useEffect(() => {
+        localStorage.setItem('quizData', JSON.stringify(quizData));
+    }, [quizData]);
 
     const setQuestions = (newQuestions) => {
         setQuizData({ ...quizData, questions: newQuestions });
