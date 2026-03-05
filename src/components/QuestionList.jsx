@@ -28,6 +28,24 @@ function QuestionList({ questions, setQuestions }) {
 		);
 	};
 
+	const moveQuestionUp = (index) => {
+		if (index === 0) return;
+		const newQuestions = [...questions];
+		const temp = newQuestions[index];
+		newQuestions[index] = newQuestions[index - 1];
+		newQuestions[index - 1] = temp;
+		setQuestions(newQuestions);
+	};
+
+	const moveQuestionDown = (index) => {
+		if (index === questions.length - 1) return;
+		const newQuestions = [...questions];
+		const temp = newQuestions[index];
+		newQuestions[index] = newQuestions[index + 1];
+		newQuestions[index + 1] = temp;
+		setQuestions(newQuestions);
+	};
+
 	return (
 		<div className="question-list-container">
 			<div className="section-header">
@@ -48,8 +66,11 @@ function QuestionList({ questions, setQuestions }) {
 							key={q.id}
 							question={q}
 							index={index}
+							totalQuestions={questions.length}
 							onDelete={handleDeleteQuestion}
 							onChange={handleQuestionChange}
+							onMoveUp={() => moveQuestionUp(index)}
+							onMoveDown={() => moveQuestionDown(index)}
 						/>
 					))}
 				</div>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { FiTrash2, FiChevronUp, FiChevronDown } from 'react-icons/fi';
+import { FiTrash2, FiChevronUp, FiChevronDown, FiArrowUp, FiArrowDown } from 'react-icons/fi';
 import OptionList from './OptionList';
 
-function QuestionCard({ question, index, onDelete, onChange }) {
+function QuestionCard({ question, index, totalQuestions, onDelete, onChange, onMoveUp, onMoveDown }) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
@@ -14,29 +14,29 @@ function QuestionCard({ question, index, onDelete, onChange }) {
                     </span>
                     <span className="question-title">Question {index + 1}</span>
                 </div>
-                <button className="icon-btn delete-btn" onClick={() => onDelete(question.id)}>
-                    <FiTrash2 />
-                </button>
+                <div className="question-header-right">
+                    <button className="icon-btn" onClick={onMoveUp} disabled={index === 0}>
+                        <FiArrowUp />
+                    </button>
+                    <button className="icon-btn" onClick={onMoveDown} disabled={index === totalQuestions - 1}>
+                        <FiArrowDown />
+                    </button>
+                    <button className="icon-btn delete-btn" onClick={() => onDelete(question.id)}>
+                        <FiTrash2 />
+                    </button>
+                </div>
             </div>
 
             {isExpanded && (
                 <div className="question-body">
                     <div className="form-row">
-                        <div className="form-group flex-2">
+                        <div className="form-group flex-1">
                             <label>Question Name</label>
                             <input
                                 type="text"
                                 value={question.name || ''}
                                 onChange={(e) => onChange(question.id, 'name', e.target.value)}
                                 placeholder="Enter question name"
-                            />
-                        </div>
-                        <div className="form-group flex-1">
-                            <label>Sort Order</label>
-                            <input
-                                type="number"
-                                value={question.sortOrder || ''}
-                                onChange={(e) => onChange(question.id, 'sortOrder', e.target.value)}
                             />
                         </div>
                     </div>
