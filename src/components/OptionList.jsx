@@ -28,6 +28,24 @@ function OptionList({ options, setOptions }) {
         setOptions(options.filter((opt) => opt.id !== id));
     };
 
+    const moveOptionUp = (index) => {
+        if (index === 0) return;
+        const newOptions = [...options];
+        const temp = newOptions[index];
+        newOptions[index] = newOptions[index - 1];
+        newOptions[index - 1] = temp;
+        setOptions(newOptions);
+    };
+
+    const moveOptionDown = (index) => {
+        if (index === options.length - 1) return;
+        const newOptions = [...options];
+        const temp = newOptions[index];
+        newOptions[index] = newOptions[index + 1];
+        newOptions[index + 1] = temp;
+        setOptions(newOptions);
+    };
+
     return (
         <div className="options-container">
             <div className="section-header">
@@ -45,8 +63,11 @@ function OptionList({ options, setOptions }) {
                             key={opt.id}
                             option={opt}
                             index={index}
+                            totalOptions={options.length}
                             onChange={handleOptionChange}
                             onDelete={handleDeleteOption}
+                            onMoveUp={() => moveOptionUp(index)}
+                            onMoveDown={() => moveOptionDown(index)}
                         />
                     ))
                 )}

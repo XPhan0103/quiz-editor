@@ -1,7 +1,7 @@
 import React from 'react';
-import { FiTrash2 } from 'react-icons/fi';
+import { FiTrash2, FiArrowUp, FiArrowDown } from 'react-icons/fi';
 
-function OptionCard({ option, index, onChange, onDelete }) {
+function OptionCard({ option, index, totalOptions, onChange, onDelete, onMoveUp, onMoveDown }) {
     return (
         <div className="option-item form-row">
             <div className="form-group flex-2">
@@ -20,14 +20,6 @@ function OptionCard({ option, index, onChange, onDelete }) {
                     placeholder="Label (e.g., Day la lua chon A)"
                 />
             </div>
-            <div className="form-group flex-1">
-                <input
-                    type="number"
-                    value={option.sortOrder || ''}
-                    onChange={(e) => onChange(option.id, 'sortOrder', e.target.value)}
-                    placeholder="Order"
-                />
-            </div>
             <div className="form-group checkbox-group">
                 <label>
                     <input
@@ -38,6 +30,12 @@ function OptionCard({ option, index, onChange, onDelete }) {
                     Correct
                 </label>
             </div>
+            <button className="icon-btn" onClick={onMoveUp} disabled={index === 0}>
+                <FiArrowUp />
+            </button>
+            <button className="icon-btn" onClick={onMoveDown} disabled={index === totalOptions - 1}>
+                <FiArrowDown />
+            </button>
             <button className="icon-btn delete-btn" onClick={() => onDelete(option.id)}>
                 <FiTrash2 />
             </button>
