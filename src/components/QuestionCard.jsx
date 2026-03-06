@@ -5,6 +5,14 @@ import OptionList from './OptionList';
 function QuestionCard({ question, index, totalQuestions, onDelete, onChange, onMoveUp, onMoveDown }) {
     const [isExpanded, setIsExpanded] = useState(false);
 
+    const optionsList = question.options || [];
+    const optionsCount = optionsList.length;
+    const correctCount = optionsList.filter(o => o.isCorrect).length;
+
+    const hasOptionsError = optionsCount < 2;
+    const hasCorrectError = optionsCount >= 2 && correctCount < 1;
+    const hasAnyError = hasOptionsError || hasCorrectError;
+
     return (
         <div className="card question-card">
             <div className="question-header">
@@ -49,6 +57,12 @@ function QuestionCard({ question, index, totalQuestions, onDelete, onChange, onM
                             rows="3"
                         />
                     </div>
+                    {hasOptionsError && (
+                        <div className="error-text">Question must have at least 2 options</div>
+                    )}
+                    {hasCorrectError && (
+                        <div className="error-text">Question must have at least 1 correct option</div>
+                    )}
                     <OptionList
                         options={question.options}
                         setOptions={(newOptions) => onChange(question.id, 'options', newOptions)}
