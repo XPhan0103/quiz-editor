@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-function Header({ onExport, onImport, onSave }) {
+function Header({ onExport, onImport, onSave, isValid }) {
     const fileInputRef = useRef(null);
 
     const handleImportClick = () => {
@@ -32,8 +32,8 @@ function Header({ onExport, onImport, onSave }) {
                     onChange={handleFileChange}
                 />
                 <button onClick={handleImportClick}>Import JSON</button>
-                <button onClick={onExport}>Export JSON</button>
-                <button className="save-btn" onClick={onSave}>Save Quiz</button>
+                <button onClick={onExport} disabled={!isValid}>Export JSON</button>
+                <button className="save-btn" onClick={onSave} disabled={!isValid}>Save Quiz</button>
             </div>
         </header>
     );
