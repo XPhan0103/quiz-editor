@@ -3,7 +3,7 @@ import { FiTrash2, FiArrowUp, FiArrowDown } from 'react-icons/fi';
 
 function OptionCard({ questionId, option, index, totalOptions, onChange, onDelete, onMoveUp, onMoveDown }) {
     return (
-        <div className="option-item form-row">
+        <div className={`option-item form-row ${option.isCorrect ? 'is-correct' : ''}`}>
             <div className="form-group flex-2">
                 <input
                     type="text"

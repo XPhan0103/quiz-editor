@@ -163,9 +163,13 @@ header {
 }
 
 .empty-state {
-	text-align: center;
-	color     : #666;
-	padding   : 60px 20px;
+	text-align   : center;
+	color        : #636e72;
+	padding      : 80px 20px;
+	background   : rgba(255, 255, 255, 0.5);
+	border-radius: 20px;
+	border       : 2px dashed #b2bec3;
+	margin       : 20px 0;
 }
 
 .question-card {
@@ -208,12 +212,28 @@ header {
 }
 
 .icon-btn {
-	background: none;
-	border    : none;
-	cursor    : pointer;
-	font-size : 16px;
-	padding   : 5px;
-	transition: background-color 0.2s ease;
+	background     : none;
+	border         : none;
+	cursor         : pointer;
+	font-size      : 18px;
+	padding        : 8px;
+	border-radius  : 50%;
+	color          : #636e72;
+	transition     : all 0.2s ease;
+	display        : inline-flex;
+	align-items    : center;
+	justify-content: center;
+}
+
+.icon-btn:hover:not(:disabled) {
+	background-color: #dfe6e9;
+	color           : #2d3436;
+	transform       : scale(1.1);
+}
+
+.icon-btn.delete-btn:hover:not(:disabled) {
+	background-color: #ff7675;
+	color           : white;
 }
 
 
@@ -265,12 +285,24 @@ header {
 }
 
 .option-item {
-	border          : 1px solid #666;
-	border-radius   : 8px;
-	padding         : 10px 15px;
-	margin-bottom   : 10px;
+	border          : 2px solid #dfe6e9;
+	border-radius   : 12px;
+	padding         : 12px 20px;
+	margin-bottom   : 15px;
 	align-items     : center;
-	background-color: white;
+	background-color: #ffffff;
+	transition      : all 0.3s ease;
+}
+
+.option-item:focus-within {
+	border-color: #a29bfe;
+	box-shadow  : 0 4px 15px rgba(162, 155, 254, 0.15);
+}
+
+.option-item.is-correct {
+	background-color: #f1fbf4;
+	border-color    : #55efc4;
+	box-shadow      : 0 4px 15px rgba(85, 239, 196, 0.2);
 }
 
 .option-item .form-group {
@@ -278,12 +310,21 @@ header {
 }
 
 .checkbox-group label {
-	display      : flex;
-	align-items  : center;
-	gap          : 8px;
-	font-weight  : normal;
-	margin-bottom: 0;
-	cursor       : pointer;
+	display        : flex;
+	align-items    : center;
+	justify-content: center;
+	gap            : 8px;
+	font-weight    : 600;
+	margin-bottom  : 0;
+	cursor         : pointer;
+	color          : #636e72;
+}
+
+.checkbox-group input[type="radio"] {
+	width       : 20px;
+	height      : 20px;
+	cursor      : pointer;
+	accent-color: #00b894;
 }
 
 .empty-state-small {
