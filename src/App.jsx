@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import QuizInfo from './components/QuizInfo';
 import QuestionList from './components/QuestionList';
+import PreviewMode from './components/PreviewMode';
+import { FiPlay } from 'react-icons/fi';
 import './index.css';
 
 function App() {
+    const [isPreviewMode, setIsPreviewMode] = useState(false);
     const [quizData, setQuizData] = useState(() => {
         const saved = localStorage.getItem('quizData');
         if (saved) {
@@ -92,13 +95,36 @@ function App() {
         }
     };
 
+    if (isPreviewMode) {
+        return (
+            <div className="app">
+                <div className="main-content" style={{ marginTop: '20px' }}>
+                    <PreviewMode quizData={quizData} onExit={() => setIsPreviewMode(false)} />
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="app">
-            <Header onExport={handleExport} onImport={handleImport} onSave={handleSave} isValid={isValid} />
+            <Header
+                onExport={handleExport}
+                onImport={handleImport}
+                onSave={handleSave}
+                isValid={isValid}
+            />
             <div className="main-content">
                 <QuizInfo quizData={quizData} setQuizData={setQuizData} />
                 <QuestionList questions={quizData.questions} setQuestions={setQuestions} />
             </div>
+
+            <button
+                className={`floating-play-btn ${!isValid ? 'disabled' : ''}`}
+                onClick={() => { if (isValid) setIsPreviewMode(true); }}
+                title={!isValid ? "Provide at least 1 valid question to Play" : "Play Quiz"}
+            >
+                <FiPlay size={24} /> <span>Play Quiz</span>
+            </button>
         </div>
     );
 }
