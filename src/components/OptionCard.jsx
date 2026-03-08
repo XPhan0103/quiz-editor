@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiTrash2, FiArrowUp, FiArrowDown } from 'react-icons/fi';
 
-function OptionCard({ option, index, totalOptions, onChange, onDelete, onMoveUp, onMoveDown }) {
+function OptionCard({ questionId, option, index, totalOptions, onChange, onDelete, onMoveUp, onMoveDown }) {
     return (
         <div className="option-item form-row">
             <div className="form-group flex-2">
@@ -23,7 +23,8 @@ function OptionCard({ option, index, totalOptions, onChange, onDelete, onMoveUp,
             <div className="form-group checkbox-group">
                 <label>
                     <input
-                        type="checkbox"
+                        type="radio"
+                        name={`correct-${questionId}`}
                         checked={option.isCorrect || false}
                         onChange={(e) => onChange(option.id, 'isCorrect', e.target.checked)}
                     />

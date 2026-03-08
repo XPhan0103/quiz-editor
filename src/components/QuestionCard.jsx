@@ -10,8 +10,7 @@ function QuestionCard({ question, index, totalQuestions, onDelete, onChange, onM
     const correctCount = optionsList.filter(o => o.isCorrect).length;
 
     const hasOptionsError = optionsCount < 2;
-    const hasCorrectError = optionsCount >= 2 && correctCount < 1;
-    const hasAnyError = hasOptionsError || hasCorrectError;
+    const hasCorrectError = optionsCount >= 2 && correctCount === 0;
 
     return (
         <div className="card question-card">
@@ -61,9 +60,10 @@ function QuestionCard({ question, index, totalQuestions, onDelete, onChange, onM
                         <div className="error-text">Question must have at least 2 options</div>
                     )}
                     {hasCorrectError && (
-                        <div className="error-text">Question must have at least 1 correct option</div>
+                        <div className="error-text">Question must have 1 correct option</div>
                     )}
                     <OptionList
+                        questionId={question.id}
                         options={question.options}
                         setOptions={(newOptions) => onChange(question.id, 'options', newOptions)}
                     />

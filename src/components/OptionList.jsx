@@ -1,7 +1,7 @@
 import React from 'react';
 import OptionCard from './OptionCard';
 
-function OptionList({ options, setOptions }) {
+function OptionList({ questionId, options, setOptions }) {
     const handleAddOption = () => {
         const newOption = {
             id: Date.now().toString(),
@@ -14,14 +14,23 @@ function OptionList({ options, setOptions }) {
     };
 
     const handleOptionChange = (id, field, value) => {
-        setOptions(
-            options.map((opt) => {
-                if (opt.id === id) {
-                    return { ...opt, [field]: value };
-                }
-                return opt;
-            })
-        );
+        if (field === 'isCorrect' && value === true) {
+            setOptions(
+                options.map((opt) => ({
+                    ...opt,
+                    isCorrect: opt.id === id
+                }))
+            );
+        } else {
+            setOptions(
+                options.map((opt) => {
+                    if (opt.id === id) {
+                        return { ...opt, [field]: value };
+                    }
+                    return opt;
+                })
+            );
+        }
     };
 
     const handleDeleteOption = (id) => {
@@ -61,6 +70,7 @@ function OptionList({ options, setOptions }) {
                     options.map((opt, index) => (
                         <OptionCard
                             key={opt.id}
+                            questionId={questionId}
                             option={opt}
                             index={index}
                             totalOptions={options.length}
