@@ -358,3 +358,34 @@ header {
 	box-shadow      : none;
 	transform       : none;
 }
+
+.preview-option-label.correct {
+	background-color: #ebfaeb;
+	border-color    : #28a745;
+}
+
+.preview-option-label.incorrect {
+	background-color: #ebfaeb;
+	border-color    : #d3`2f2f;
+}
+
+.score-display {
+	background-color: white;
+	padding         : 20px;
+	border-radius   : 8px;
+	border          : 1px solid #666;
+	display         : inline-block;
+	min-width       : 300px;
+}
+
+.score-display h3 {
+	margin   : 0 0 10px 0;
+	font-size: 24px;
+	color    : #333;
+}
+
+.score-display p {
+	margin   : 0;
+	color    : #666;
+	font-size: 16px;
+}
